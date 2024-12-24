@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearchPostgres"]
+  // binaryTargets = ["native", "rhel-openssl-3.0.x"] // komentari jika menggunakan database local
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL") // komentari jika menggunakan database local
+}
+
+enum ROLE {
+  admin
+  user
+}
+
+enum STATUS {
+  menunggu
+  diproses
+  diantar
+  sampai
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  username String @unique
+  phone    String @unique
+  password String
+  role     ROLE   @default(user)
+
+  reviews Review[]
+  orders  Order[]
+
+  @@map("users")
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  user_id    String
+  order_id   String   @unique
+  review     String
+  rating     Int      @db.SmallInt
+  created_at DateTime @default(now())
+
+  // Relation
+  order Order @relation(fields: [order_id], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("Reviews")
+}
+
+model Order {
+  id            String   @id @default(uuid())
+  user_id       String
+  order_date    DateTime @default(now())
+  total_price   Int
+  payment_proof String
+  receipt       String
+  status        STATUS
+
+  // Relation
+  user   User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  review Review?
+  item   Item[]
+
+  @@map("orders")
+}
+
+model Item {
+  id       String @id @default(uuid())
+  order_id String
+  unit_id  String
+  quantity Int    @db.SmallInt
+
+  order Order @relation(fields: [order_id], references: [id], onDelete: Cascade)
+
+  @@map("items")
+}
+
+model Unit {
+  id          String  @id @default(uuid())
+  brand       String
+  name        String
+  look        String
+  image       String
+  description String
+  year        String
+  document    String
+  type        String
+  price       Int
+  stock       Int     @db.SmallInt
+  deleted     Boolean @default(false)
+
+  @@map("units")
+}
