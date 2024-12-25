@@ -61,6 +61,18 @@ class UnitController {
     }
   };
 
+  SoftDeleteUnitById = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+
+      await this.unitService.SoftDeleteUnitById(id);
+
+      return response(res, 200, null, "Berhasil menghapus unit");
+    } catch (e) {
+      next(e);
+    }
+  };
+
   GetUnitById = async (req, res, next) => {
     try {
       const { id } = req.params;

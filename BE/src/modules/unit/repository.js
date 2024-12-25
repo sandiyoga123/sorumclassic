@@ -20,6 +20,19 @@ class UnitRepository {
     });
   }
 
+  async SoftDeleteUnitById(id) {
+    return await prismaConnect(async (prisma) => {
+      return await prisma.unit.update({
+        where: {
+          id: id,
+        },
+        data: {
+          deleted: true,
+        },
+      });
+    });
+  }
+
   async GetUnitById(id) {
     return await prismaConnect(async (prisma) => {
       return await prisma.unit.findUnique({

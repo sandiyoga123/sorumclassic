@@ -8,6 +8,7 @@ const unitController = new UnitController();
 
 router.post("/", middleware, authorize(ROLE.admin), unitController.CreateUnit);
 router.put("/:id", middleware, authorize(ROLE.admin), unitController.EditUniById);
+router.delete("/:id", middleware, authorize(ROLE.admin), unitController.SoftDeleteUnitById);
 router.get("/", unitController.GetUnitForUser);
 router.get("/:id", unitController.GetUnitById);
 

@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import { fetchProfile } from "../API/auth";
+import { initFlowbite } from "flowbite";
 
 export const NavbarAdmin = ({ component: Component }) => {
+  initFlowbite();
+
   const navigate = useNavigate();
 
   const [user, setUser] = useState();
   const token = localStorage.getItem("token");
 
-  if (!token) {
-    window.location.href = "/login";
-  }
-
   useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
     const fetch = async () => {
       try {
         const response = await fetchProfile(token);
@@ -42,10 +44,10 @@ export const NavbarAdmin = ({ component: Component }) => {
         data-drawer-toggle="default-sidebar"
         aria-controls="default-sidebar"
         type="button"
-        class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       >
-        <span class="sr-only">Open sidebar</span>
-        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <span className="sr-only">Open sidebar</span>
+        <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path
             clip-rule="evenodd"
             fill-rule="evenodd"
@@ -54,26 +56,32 @@ export const NavbarAdmin = ({ component: Component }) => {
         </svg>
       </button>
 
-      <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-        <div class="h-full px-3 py-4 overflow-y-auto bg-gradient-to-b from-gray-900 to-gray-700">
-          <a href="https://flowbite.com/" class="flex items-center ps-2.5 mb-20">
-            {/* <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 me-3 sm:h-7" alt="Flowbite Logo" /> */}
-            <span class="self-center text-3xl font-semibold whitespace-nowrap text-white text-wrap">ShowRoom Classic</span>
+      <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-gradient-to-b from-gray-900 to-gray-700">
+          <a href="https://flowbite.com/" className="flex items-center ps-2.5 mb-20">
+            {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-6 me-3 sm:h-7" alt="Flowbite Logo" /> */}
+            <span className="self-center text-3xl font-semibold whitespace-nowrap text-white text-wrap">ShowRoom Classic</span>
           </a>
-          <ul class="space-y-2 font-medium">
+          <ul className="space-y-2 font-medium">
             <li>
-              <Link to={"/admin/"} class="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+              <Link to={"/admin/"} className="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <svg
+                  className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 21"
+                >
                   <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                 </svg>
-                <span class="ms-3">Laporan Keuangan</span>
+                <span className="ms-3">Laporan Keuangan</span>
               </Link>
             </li>
             <li>
-              <Link to={"/admin/unit"} class="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <Link to={"/admin/unit"} className="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <svg
-                  class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -88,13 +96,13 @@ export const NavbarAdmin = ({ component: Component }) => {
                   />
                 </svg>
 
-                <span class="ms-3">Unit</span>
+                <span className="ms-3">Unit</span>
               </Link>
             </li>
             <li>
-              <Link to={"/admin/order"} class="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <Link to={"/admin/order"} className="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <svg
-                  class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -109,13 +117,13 @@ export const NavbarAdmin = ({ component: Component }) => {
                   />
                 </svg>
 
-                <span class="ms-3">Pesanan</span>
+                <span className="ms-3">Pesanan</span>
               </Link>
             </li>
             <li>
-              <Link to={"/admin/profile"} class="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <Link to={"/admin/profile"} className="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <svg
-                  class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -126,13 +134,13 @@ export const NavbarAdmin = ({ component: Component }) => {
                   <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd" />
                 </svg>
 
-                <span class="ms-3">Profil</span>
+                <span className="ms-3">Profil</span>
               </Link>
             </li>
             <li>
-              <button class="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group w-full" onClick={handleLogout}>
+              <button className="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group w-full" onClick={handleLogout}>
                 <svg
-                  class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -140,18 +148,18 @@ export const NavbarAdmin = ({ component: Component }) => {
                   fill="none"
                   viewBox="0 0 24 24"
                 >
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2" />
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2" />
                 </svg>
 
-                <span class="ms-3">Logout</span>
+                <span className="ms-3">Logout</span>
               </button>
             </li>
           </ul>
         </div>
       </aside>
 
-      <div class="p-4 sm:ml-64 bg-gray-100 min-h-screen">
-        <div class="p-4 rounded-lg ">{user && token && <Component user={user} token={token} />}</div>
+      <div className="p-4 sm:ml-64 bg-gray-100 min-h-screen">
+        <div className="p-4 rounded-lg ">{user && token && <Component user={user} token={token} />}</div>
       </div>
     </>
   );

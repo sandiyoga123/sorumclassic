@@ -39,6 +39,16 @@ class UnitService {
     return await this.unitRepo.EditUnitById(id, data);
   }
 
+  async SoftDeleteUnitById(id) {
+    const unit = await this.unitRepo.GetUnitById(id);
+
+    if (!unit) {
+      throwError(404, "Data tidak ditemukan");
+    }
+
+    return await this.unitRepo.SoftDeleteUnitById(id);
+  }
+
   async GetUnitById(id, req) {
     const data = await this.unitRepo.GetUnitById(id);
 
