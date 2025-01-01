@@ -180,7 +180,7 @@ const EditUnit = ({ user, token }) => {
             <button type="submit" className="px-6 py-2 rounded text-white bg-blue-600 hover:bg-blue-500 text-nowrap" disabled={isSaving}>
               {isSaving ? "Menyimpan..." : "Simpan Perubahan"}
             </button>
-            <Link to="/admin/unit" className={`px-6 py-2 rounded outline outline-1 outline-slate-300 hover:bg-slate-50 text-nowrap text-center ${isSaving ? "pointer-events-none" : ""}`}>
+            <Link to={`/admin/unit/${id}`} className={`px-6 py-2 rounded outline outline-1 outline-slate-300 hover:bg-slate-50 text-nowrap text-center ${isSaving ? "pointer-events-none" : ""}`}>
               Kembali
             </Link>
           </div>

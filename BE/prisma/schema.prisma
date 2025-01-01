@@ -22,10 +22,12 @@ enum ROLE {
 }
 
 enum STATUS {
-  menunggu
-  diproses
-  diantar
-  sampai
+  Pembayaran
+  Dikemas
+  Dikirim
+  Review
+  Riwayat
+  Ditolak
 }
 
 model User {
@@ -54,7 +56,7 @@ model Review {
   order Order @relation(fields: [order_id], references: [id], onDelete: Cascade)
   user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
-  @@map("Reviews")
+  @@map("reviews")
 }
 
 model Order {
@@ -62,25 +64,43 @@ model Order {
   user_id       String
   order_date    DateTime @default(now())
   total_price   Int
-  payment_proof String
-  receipt       String
-  status        STATUS
+  payment_proof String?
+  receipt       String?
+  status        STATUS   @default(Pembayaran)
 
   // Relation
-  user   User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  review Review?
-  item   Item[]
+  user         User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  review       Review?
+  item         Item?
+  order_detail OrderDetails?
 
   @@map("orders")
 }
 
-model Item {
-  id       String @id @default(uuid())
-  order_id String
-  unit_id  String
-  quantity Int    @db.SmallInt
+model OrderDetails {
+  id              String  @id @default(uuid())
+  order_id        String  @unique
+  name            String
+  phone           String
+  address         String
+  postal_code     String
+  expedition      String
+  expedition_fee  Int
+  additional_info String?
 
   order Order @relation(fields: [order_id], references: [id], onDelete: Cascade)
+
+  @@map("order_details")
+}
+
+model Item {
+  id       String @id @default(uuid())
+  order_id String @unique
+  unit_id  String
+  quantity Int    @default(1) @db.SmallInt
+
+  order Order @relation(fields: [order_id], references: [id], onDelete: Cascade)
+  unit  Unit  @relation(fields: [unit_id], references: [id], onDelete: Cascade)
 
   @@map("items")
 }
@@ -98,6 +118,8 @@ model Unit {
   price       Int
   stock       Int     @db.SmallInt
   deleted     Boolean @default(false)
+
+  order_items Item[]
 
   @@map("units")
 }

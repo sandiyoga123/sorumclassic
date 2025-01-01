@@ -8,6 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const nextPage = localStorage.getItem("nextPage");
 
   useEffect(() => {
     if (token) {
@@ -35,6 +36,12 @@ const Login = () => {
     try {
       const response = await fetchLogin(data);
       localStorage.setItem("token", response.data.data.token);
+
+      if (nextPage && nextPage !== "" && response.data.data.role == "user") {
+        localStorage.removeItem("nextPage");
+        navigate(nextPage);
+        return;
+      }
 
       if (response.data.data.role == "admin") {
         navigate("/admin/");

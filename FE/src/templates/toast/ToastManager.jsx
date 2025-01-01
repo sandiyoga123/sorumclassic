@@ -33,7 +33,7 @@ export const ToastProvider = ({ children }) => {
       {children}
       {/* Only render if there are toasts or during fade-out */}
       {(toasts.length > 0 || isVisible) && (
-        <div className={`fixed top-4 right-4 z-50 flex flex-col gap-4 min-w-80 transition-opacity duration-300 ${toasts.length === 0 ? "opacity-0" : "opacity-100"}`}>
+        <div className={`fixed top-4 right-4 z-50 flex flex-col gap-4 min-w-80 transition-opacity duration-300 ${toasts.length === 0 ? "opacity-0" : "opacity-100"} z-[51]`}>
           {toasts.map((toast) => (
             <Toast key={toast.id} type={toast.type} message={toast.message} duration={toast.duration} onClose={() => removeToast(toast.id)} />
           ))}

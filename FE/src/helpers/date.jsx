@@ -28,3 +28,26 @@ export function formatDateIndonesia(dateInput, includeTime = false) {
   // Return the formatted date string
   return includeTime ? `${day} ${month} ${year}, ${time}` : `${day} ${month} ${year}`;
 }
+
+export function formatToIDRVerbal(amount) {
+  if (typeof amount !== "number" || amount < 0) {
+    throw new Error("Input must be a positive number");
+  }
+
+  // Define the units for IDR
+  const units = ["", "Ribu", "Juta", "Miliar", "Triliun"];
+
+  let unitIndex = 0;
+  let formattedAmount = amount;
+
+  // Reduce the amount to a readable range with a corresponding unit
+  while (formattedAmount >= 1000 && unitIndex < units.length - 1) {
+    formattedAmount /= 1000;
+    unitIndex++;
+  }
+
+  // Format to 2 decimal places if necessary and add commas
+  const result = `${formattedAmount.toLocaleString("id-ID", { maximumFractionDigits: 2 })} ${units[unitIndex]}`;
+
+  return result.trim();
+}

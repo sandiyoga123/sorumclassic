@@ -6,8 +6,8 @@
     "seed": "node prisma/seeders/seed.js"
   },
   "scripts": {
-    "start": "npx prisma migrate dev && node index.js",
-    "dev": "nodemon ./src/index.js",
+    "start": "npx prisma migrate dev && node ./api/index.js",
+    "dev": "nodemon ./api/index.js",
     "postinstall": "prisma generate"
   },
   "dependencies": {

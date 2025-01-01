@@ -60,7 +60,7 @@ export const NavbarAdmin = ({ component: Component }) => {
         <div className="h-full px-3 py-4 overflow-y-auto bg-gradient-to-b from-gray-900 to-gray-700">
           <a href="https://flowbite.com/" className="flex items-center ps-2.5 mb-20">
             {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-6 me-3 sm:h-7" alt="Flowbite Logo" /> */}
-            <span className="self-center text-3xl font-semibold whitespace-nowrap text-white text-wrap">ShowRoom Classic</span>
+            <span className="self-center text-3xl font-semibold whitespace-nowrap text-white text-wrap">SorumClassic</span>
           </a>
           <ul className="space-y-2 font-medium">
             <li>
@@ -118,23 +118,6 @@ export const NavbarAdmin = ({ component: Component }) => {
                 </svg>
 
                 <span className="ms-3">Pesanan</span>
-              </Link>
-            </li>
-            <li>
-              <Link to={"/admin/profile"} className="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg
-                  className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd" />
-                </svg>
-
-                <span className="ms-3">Profil</span>
               </Link>
             </li>
             <li>
