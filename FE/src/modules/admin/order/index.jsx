@@ -3,7 +3,7 @@ import { useToast } from "../../../templates/toast/ToastManager";
 import { useNavigate } from "react-router-dom";
 import { fetchGetAllOrder } from "../../../API/order";
 import Pagination from "../../../templates/pagination";
-import Cards from "./components/Cards";
+import Cards from "./components/cards";
 import FilterSection from "./components/filter";
 
 const OrderAdmin = ({ user, token }) => {
