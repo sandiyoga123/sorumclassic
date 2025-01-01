@@ -63,7 +63,7 @@ model Order {
   id            String   @id @default(uuid())
   user_id       String
   order_date    DateTime @default(now())
-  total_price   BigInt
+  total_price   Int
   payment_proof String?
   receipt       String?
   status        STATUS   @default(Pembayaran)
@@ -115,7 +115,7 @@ model Unit {
   year        String
   document    String
   type        String
-  price       BigInt
+  price       Int
   stock       Int     @db.SmallInt
   deleted     Boolean @default(false)
 
