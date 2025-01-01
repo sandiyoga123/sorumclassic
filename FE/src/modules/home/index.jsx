@@ -3,6 +3,7 @@ import hayabusa from "/src/assets/hayabusa.avif";
 import home1 from "/src/assets/home1.png";
 import home2 from "/src/assets/home2.png";
 import home3 from "/src/assets/home3.png";
+import { initFlowbite } from "flowbite";
 
 const Home = () => {
   return (

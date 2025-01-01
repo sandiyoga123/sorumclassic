@@ -39,14 +39,14 @@ const Login = () => {
 
       if (nextPage && nextPage !== "" && response.data.data.role == "user") {
         localStorage.removeItem("nextPage");
-        navigate(nextPage);
+        window.location.href = `${nextPage}`;
         return;
       }
 
       if (response.data.data.role == "admin") {
-        navigate("/admin/");
+        window.location.href = "/admin/";
       } else {
-        navigate("/");
+        window.location.href = "/";
       }
       addToast(response.data.message, "success");
     } catch (e) {
@@ -105,14 +105,14 @@ const Login = () => {
               </button>
               <p className="text-sm font-light text-gray-700 dark:text-gray-400">
                 Belum punya akun?{" "}
-                <Link to={"/register"} className="font-medium text-gray-600 hover:underline dark:text-gray-500">
+                <a href={"/register"} className="font-medium text-gray-600 hover:underline dark:text-gray-500">
                   Daftar disini
-                </Link>
+                </a>
               </p>
             </form>
-            <Link to="/" className="">
+            <a href="/" className="">
               <p className="mt-4 hover:underline">&#x2B60; {"Kembali ke home"}</p>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

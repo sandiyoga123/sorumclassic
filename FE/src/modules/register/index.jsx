@@ -38,7 +38,7 @@ const Register = () => {
       const response = await fetchRegister(data);
       addToast(response.data.message, "success");
       setTimeout(() => {
-        navigate("/login");
+        window.location.href = "/login";
       }, 1000);
     } catch (e) {
       if (typeof e.response.data.message !== "string") {
@@ -132,14 +132,14 @@ const Register = () => {
               </button>
               <p className="text-sm font-light text-gray-700 dark:text-gray-400">
                 Sudah punya akun?{" "}
-                <Link to={"/login"} className="font-medium text-gray-600 hover:underline dark:text-gray-500">
+                <a href={"/login"} className="font-medium text-gray-600 hover:underline dark:text-gray-500">
                   Masuk disini
-                </Link>
+                </a>
               </p>
             </form>
-            <Link to="/" className="">
+            <a href="/" className="">
               <p className="mt-4 hover:underline">&#x2B60; {"Kembali ke home"}</p>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

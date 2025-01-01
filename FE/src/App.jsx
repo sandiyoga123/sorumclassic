@@ -3,7 +3,6 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { initFlowbite } from "flowbite";
-import Navbar from "./templates/navbar";
 import Dashboard from "./modules/dashboard";
 import Login from "./modules/login";
 import NavbarAdmin from "./templates/navbar-admin";
@@ -22,18 +21,19 @@ import NavbarUser from "./templates/navbar-user";
 import FAQ from "./modules/faq";
 import OrderAdmin from "./modules/admin/order";
 import OrderDetailAdmin from "./modules/admin/order/detail";
+import NavbarComponent from "./templates/navbar";
 
 export default function App() {
   // Re-initialize Flowbite components after navigation
-
+  initFlowbite();
   return (
     <BrowserRouter>
       <Routes>
         {/* Global */}
-        <Route path="/" element={<Navbar component={Home} />} />
-        <Route path="/faq" element={<Navbar component={FAQ} />} />
-        <Route path="/product" element={<Navbar component={Product} />} />
-        <Route path="/product/:id" element={<Navbar component={DetailProduct} />} />
+        <Route path="/" element={<NavbarComponent component={Home} />} />
+        <Route path="/faq" element={<NavbarComponent component={FAQ} />} />
+        <Route path="/product" element={<NavbarComponent component={Product} />} />
+        <Route path="/product/:id" element={<NavbarComponent component={DetailProduct} />} />
         <Route path="/checkout/:id" element={<NavbarUser component={CheckoutProduct} />} />
 
         <Route path="/order" element={<NavbarUser component={UserOrder} />} />

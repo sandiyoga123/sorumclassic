@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useToast } from "./toast/ToastManager";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchProfile } from "../API/auth";
 import { initFlowbite } from "flowbite";
 import Footer from "./footer";
@@ -24,14 +24,14 @@ const NavbarUser = ({ component: Component }) => {
       } catch (e) {
         if (e.response.status === 401) {
           localStorage.clear();
-          navigate("/login");
+          window.location.href = "/login";
         }
       }
     };
 
     if (!token) {
       localStorage.clear();
-      navigate("/login");
+      window.location.href = "/login";
     } else {
       fetch();
     }
@@ -39,7 +39,7 @@ const NavbarUser = ({ component: Component }) => {
 
   async function handleLogout() {
     localStorage.clear();
-    return navigate("/login");
+    return (window.location.href = "/login");
   }
   return (
     <>
@@ -51,12 +51,12 @@ const NavbarUser = ({ component: Component }) => {
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse items-center">
             {!user ? (
-              <Link
-                to={"/login"}
+              <a
+                href={"/login"}
                 className="hidden sm:inline text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
               >
                 Masuk
-              </Link>
+              </a>
             ) : (
               <button
                 onClick={handleLogout}
@@ -81,44 +81,44 @@ const NavbarUser = ({ component: Component }) => {
           <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
-                <Link to="/" className="block py-2 px-3 text-gray-900 hover:bg-gray-100  rounded md:bg-transparent md:text-slate-700 md:p-0 md:dark:text-slate-500" aria-current="page">
+                <a href="/" className="block py-2 px-3 text-gray-900 hover:bg-gray-100  rounded md:bg-transparent md:text-slate-700 md:p-0 md:dark:text-slate-500" aria-current="page">
                   Home
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
-                  to="/product"
+                <a
+                  href="/product"
                   className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-slate-700 md:p-0 md:dark:hover:text-slate-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Produk
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
-                  to="/faq"
+                <a
+                  href="/faq"
                   className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-slate-700 md:p-0 md:dark:hover:text-slate-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   FAQ
-                </Link>
+                </a>
               </li>
               {user && (
                 <li>
-                  <Link
-                    to="/order"
+                  <a
+                    href="/order"
                     className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-slate-700 md:p-0 md:dark:hover:text-slate-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Pesanan
-                  </Link>
+                  </a>
                 </li>
               )}
               <li>
                 {!user ? (
-                  <Link
-                    to={"/login"}
+                  <a
+                    href={"/login"}
                     className="sm:hidden block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-slate-700 md:p-0 md:dark:hover:text-slate-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Masuk
-                  </Link>
+                  </a>
                 ) : (
                   <button
                     onClick={handleLogout}
