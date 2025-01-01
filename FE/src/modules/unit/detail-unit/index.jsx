@@ -49,6 +49,7 @@ const DetailUnit = ({ user, token }) => {
   return (
     <div className="w-full p-6 bg-white rounded-lg">
       <div className="flex flex-col md:flex-row gap-6">
+        {isLoading && <h1>Memuat....</h1>}
         {!isLoading && unit && (
           <>
             {/* Left Column - Images */}

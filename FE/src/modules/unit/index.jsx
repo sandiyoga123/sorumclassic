@@ -5,14 +5,17 @@ import { fetchAllUndeletedUnit } from "../../API/unit";
 import { Link } from "react-router-dom";
 import ImageLoader from "../../helpers/image-loader";
 import formatToRupiah from "../../helpers/rupiah";
+import NoDataTable from "../user/order/components/no-order";
 
 const Unit = () => {
   const addToast = useToast();
 
   const [units, setUnits] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
+      setIsLoading(true);
       try {
         const response = await fetchAllUndeletedUnit();
 
@@ -20,6 +23,8 @@ const Unit = () => {
         setUnits(response.data.data);
       } catch (e) {
         addToast(e.response.data.message, "danger");
+      } finally {
+        setIsLoading(false);
       }
     };
     fetch();
@@ -54,7 +59,9 @@ const Unit = () => {
             </tr>
           </thead>
           <tbody>
-            {units ? (
+            {isLoading ? (
+              <NoDataTable colSpan={5} message={"Mohon tunggu..."} />
+            ) : units && units.length > 0 ? (
               units.map((item) => {
                 return (
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-50">
@@ -72,20 +79,10 @@ const Unit = () => {
                   </tr>
                 );
               })
+            ) : units && units.length == 0 ? (
+              <NoDataTable colSpan={5} message={"Belum ada unit"} />
             ) : (
-              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-50">
-                <th scope="row" className="font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  Apple MacBook Pro 17"
-                </th>
-                <td className="">Silver</td>
-                <td className="">Laptop</td>
-                <td className="">$2999</td>
-                <td className="">
-                  <Link to="#" className="px-4 py-2 rounded bg-blue-600 text-white font-medium hover:bg-blue-500 text-nowrap">
-                    Lihat Detail
-                  </Link>
-                </td>
-              </tr>
+              <NoDataTable colSpan={5} message={"Gagal memuat data"} />
             )}
           </tbody>
         </table>
