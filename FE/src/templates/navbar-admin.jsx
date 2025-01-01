@@ -56,7 +56,7 @@ export const NavbarAdmin = ({ component: Component }) => {
         </svg>
       </button>
 
-      <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+      <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar" inert>
         <div className="h-full px-3 py-4 overflow-y-auto bg-gradient-to-b from-gray-900 to-gray-700">
           <a href="https://flowbite.com/" className="flex items-center ps-2.5 mb-20">
             {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-6 me-3 sm:h-7" alt="Flowbite Logo" /> */}
