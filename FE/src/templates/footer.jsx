@@ -21,7 +21,7 @@ const Footer = () => {
                   fill="#D8D2C2"
                 />
               </svg>
-              <a href="https://maps.app.goo.gl/sgRmVAJSRCSx4EhQ8" target="_blank" className="text-white hover:underline">
+              <a href="https://maps.app.goo.gl/KshobdwhLgroiTxR9" target="_blank" className="text-white hover:underline">
                 Lihat di peta
               </a>
             </div>
@@ -47,7 +47,7 @@ const Footer = () => {
                 />
               </svg>
 
-              <a href="https://wa.me/+6283811921019" target="_blank" className="text-white hover:underline">
+              <a href="https://wa.me/+6281299063740" target="_blank" className="text-white hover:underline">
                 Hubungi kami
               </a>
             </div>
