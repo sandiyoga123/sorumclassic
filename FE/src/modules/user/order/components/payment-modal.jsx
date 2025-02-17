@@ -1,9 +1,11 @@
-import { Button, Modal } from "flowbite-react";
+import { Button, Modal, Tabs } from "flowbite-react";
 import { useState } from "react";
 import { FileInput, Label } from "flowbite-react";
 import Cards from "./cards";
 import { fetchUploadPayment } from "../../../../API/order";
 import { useToast } from "../../../../templates/toast/ToastManager";
+import ImageLoader from "../../../../helpers/image-loader";
+import qris from "../../../../assets/qris.jpeg";
 
 function PaymentModal({ order, setStatus }) {
   const addToast = useToast();
@@ -74,8 +76,14 @@ function PaymentModal({ order, setStatus }) {
         size="5xl"
       >
         <Modal.Header>Upload Bukti Bayar</Modal.Header>
-        <Modal.Body>
-          {order && <Cards data={order} status={"Pembayaran"} isLoading={isLoading} />}
+        <Modal.Body className="py-3">
+          <Tabs aria-label="Full width tabs" variant="fullWidth" className="">
+            <Tabs.Item active title="Qris" className="">
+              <ImageLoader alt={"qris"} src={qris} className={"max-w-[70%] md:max-w-[40%] mx-auto"} />
+            </Tabs.Item>
+            <Tabs.Item title="Pesanan">{order && <Cards data={order} status={"Pembayaran"} isLoading={isLoading} />}</Tabs.Item>
+          </Tabs>
+
           <div className="space-y-4">
             <div>
               <Label htmlFor="file-upload-helper-text" value="Upload Bukti Pembayaran" />
